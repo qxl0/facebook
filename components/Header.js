@@ -4,6 +4,7 @@ import {
   BellIcon,
   ChatIcon,
   ChevronDownIcon,
+  HomeIcon,
   UserGroupIcon,
   ViewGridIcon,
 } from "@heroicons/react/solid";
@@ -14,6 +15,7 @@ import {
   SearchIcon,
   ShoppingCartIcon,
 } from "@heroicons/react/outline";
+import HeaderIcon from "./HeaderIcon";
 
 const Header = () => {
   return (
@@ -31,6 +33,15 @@ const Header = () => {
           type="text"
           placeholder="Search faceboo"
         />
+      </div>
+      <div className="flex flex-grow justify-center">
+        <div>
+          <HeaderIcon Icon={HomeIcon} />
+          <HeaderIcon Icon={FlagIcon} />
+          <HeaderIcon Icon={PlayIcon} />
+          <HeaderIcon Icon={ShoppingCartIcon} />
+          <HeaderIcon Icon={UserGroupIcon} />
+        </div>
       </div>
     </div>
   );
