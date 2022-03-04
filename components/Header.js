@@ -35,7 +35,7 @@ const Header = () => {
         />
       </div>
       <div className="flex flex-grow justify-center">
-        <div>
+        <div className="flex space-x-6 md:space-x-2">
           <HeaderIcon Icon={HomeIcon} />
           <HeaderIcon Icon={FlagIcon} />
           <HeaderIcon Icon={PlayIcon} />
