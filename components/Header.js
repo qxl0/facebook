@@ -58,7 +58,7 @@ const Header = () => {
           height={40}
           layout="fixed"
         />
-        <p className="font-semibold">John Li</p>
+        <p className="font-semibold">{session.user.name}</p>
         <ViewGridIcon className="icon" />
         <ChatIcon className="icon" />
         <BellIcon className="icon" />
