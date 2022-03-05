@@ -1,4 +1,5 @@
 import React from "react";
+import StoryCard from "./StoryCard";
 
 const stories = [
   {
@@ -29,7 +30,13 @@ const stories = [
 ];
 
 function Stories() {
-  return <div>Stories</div>;
+  return (
+    <div className="mx-auto flex justify-center space-x-3">
+      {stories.map(({ name, src, profile }) => (
+        <StoryCard name={name} src={src} profile={profile} />
+      ))}
+    </div>
+  );
 }
 
 export default Stories;
