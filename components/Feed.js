@@ -3,7 +3,7 @@ import Stories from "./Stories";
 
 const Feed = () => {
   return (
-    <div>
+    <div className="h-screen flex-grow pb-44 pt-6">
       <div>
         {/* Stores */}
         <Stories />

@@ -33,7 +33,7 @@ function Stories() {
   return (
     <div className="mx-auto flex justify-center space-x-3">
       {stories.map(({ name, src, profile }) => (
-        <StoryCard name={name} src={src} profile={profile} />
+        <StoryCard key={src} name={name} src={src} profile={profile} />
       ))}
     </div>
   );
