@@ -1,8 +1,9 @@
 import React from "react";
+import Image from "next/image";
 
 const SidebarRow = ({ src, Icon, title }) => {
   return (
-    <div>
+    <div className="flex items-center space-x-2 p-4">
       {src && (
         <Image
           className="rounded-full"
@@ -12,9 +13,8 @@ const SidebarRow = ({ src, Icon, title }) => {
           layout="fixed"
         />
       )}
-      {Icon && (
-        <Icon className="hidden font-medium sm:inline-flex">{title}</Icon>
-      )}
+      {Icon && <Icon className=" h-8 w-8 text-blue-500 " />}
+      <p className="hidden font-medium sm:inline-flex">{title}</p>
     </div>
   );
 };
