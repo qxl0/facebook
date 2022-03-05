@@ -33,7 +33,7 @@ const Header = () => {
             className="ml-2 hidden items-center bg-transparent placeholder-gray-500 
               outline-none md:inline-flex"
             type="text"
-            placeholder="Search faceboo"
+            placeholder="Search facebook"
           />
         </div>
       </div>
