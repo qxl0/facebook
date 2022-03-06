@@ -9,6 +9,12 @@ import {
 import { useRef } from "react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  uploadString,
+} from "firebase/storage";
 
 const InputBox = () => {
   const { data: session } = useSession();
@@ -31,6 +37,18 @@ const InputBox = () => {
     })
       .then((docRef) => {
         console.log(docRef.id);
+        if (imageToPost) {
+          const storage = getStorage();
+          const imageRef = ref(storage, `posts/${docRef.id}`);
+          const uploadTask = uploadBytesResumable(
+            imageRef,
+            imageToPost,
+            "data_url"
+          );
+          uploadTask.then((snapshot) => {
+            console.log(snapshot);
+          });
+        }
         inputRef.current.value = "";
       })
       .catch((error) => {
