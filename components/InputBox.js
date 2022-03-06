@@ -13,7 +13,8 @@ import { db } from "../firebase";
 const InputBox = () => {
   const { data: session } = useSession();
   const inputRef = useRef(null);
-
+  const filePickerRef = useRef(null);
+  const [imageToPost, setImageToPost] = React.useState(null);
   const sendPost = (e) => {
     e.preventDefault();
 
@@ -21,7 +22,6 @@ const InputBox = () => {
       return;
     }
 
-    debugger;
     addDoc(collection(db, "posts"), {
       message: inputRef.current.value,
       name: session.user.name,
@@ -36,6 +36,17 @@ const InputBox = () => {
       .catch((error) => {
         console.error("Error adding document: ", error);
       });
+  };
+
+  const addImageToPost = (e) => {
+    e.preventDefault();
+    const reader = new FileReader();
+    if (e.target.files[0]) {
+      reader.readAsDataURL(e.target.files[0]);
+    }
+    reader.onload = (e) => {
+      setImageToPost(e.target.result);
+    };
   };
   return (
     <div className="mt-6 rounded-2xl bg-white p-2 font-medium text-gray-500 shadow-md focus:outline-none">
@@ -64,9 +75,19 @@ const InputBox = () => {
           <VideoCameraIcon className="h-7 text-red-500" />
           <p className="text-xs sm:text-sm xl:text-base">Live Video</p>
         </div>
-        <div className="inputIcon">
+
+        <div
+          className="inputIcon"
+          onClick={() => filePickerRef.current.click()}
+        >
           <CameraIcon className="h-7 text-green-500" />
           <p className="text-xs sm:text-sm xl:text-base">Photo video</p>
+          <input
+            type="file"
+            ref={filePickerRef}
+            hidden
+            onChange={addImageToPost}
+          />
         </div>
 
         <div className="inputIcon">
