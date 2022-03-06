@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { ChatAltIcon, ShareIcon, ThumbUpIcon } from "@heroicons/react/outline";
 
 const Post = ({ id, name, message, email, timestamp, image, postImage }) => {
   return (
@@ -27,6 +28,22 @@ const Post = ({ id, name, message, email, timestamp, image, postImage }) => {
           <Image src={postImage} objectFit="cover" layout="fill" />
         </div>
       )}
+
+      {/* footer */}
+      <div className="flex items-center justify-between rounded-b-2xl border-t bg-white text-gray-400 shadow-md">
+        <div className="inputIcon">
+          <ThumbUpIcon className="h-4" />
+          <p className="text-xs sm:text-base">Like</p>
+        </div>
+        <div className="inputIcon">
+          <ChatAltIcon className="h-4" />
+          <p className="text-xs sm:text-base">Comment</p>
+        </div>
+        <div className="inputIcon">
+          <ShareIcon className="h-4" />
+          <p className="text-xs sm:text-base">Share</p>
+        </div>
+      </div>
     </div>
   );
 };
