@@ -52,6 +52,7 @@ const InputBox = () => {
           "data_url"
         );
 
+        console.log({ uploadTask });
         const url = await getDownloadURL(uploadTask.ref);
 
         console.log(`Posts ${docRef.id} , url at ${url}`);

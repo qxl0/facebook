@@ -12,6 +12,7 @@ const Posts = () => {
   return (
     <div>
       {realtimePosts?.docs.map((post) => (
+        // console.log("postImage: ", post.data().postImage),
         <Post
           key={post.id}
           name={post.data().name}
