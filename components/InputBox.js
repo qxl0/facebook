@@ -40,41 +40,34 @@ const InputBox = () => {
       email: session.user.email,
       image: session.user.image,
       timestamp: serverTimestamp(),
-    }).then((docRef) => {
+    }).then(async (docRef) => {
       console.log(docRef.id);
       if (imageToPost) {
         const storage = getStorage();
         const imageRef = ref(storage, `posts/${docRef.id}`);
-        const uploadTask = uploadBytesResumable(
+
+        const uploadTask = await uploadString(
           imageRef,
           imageToPost,
           "data_url"
         );
 
-        uploadTask.on(
-          "state_changed",
-          null,
-          (error) => console.log(error),
-          () => {
-            console.log("Uploaded!!");
-            // when the upload is complete, set the image url
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              console.log(`Posts ${docRef.id} , url at ${downloadURL}`);
-              setDoc(
-                docRef,
-                {
-                  postImage: downloadURL,
-                },
-                { merge: true }
-              );
-            });
-          }
+        const url = await getDownloadURL(uploadTask.ref);
+
+        console.log(`Posts ${docRef.id} , url at ${url}`);
+
+        await setDoc(
+          docRef,
+          {
+            postImage: url,
+          },
+          { merge: true }
         );
+        removeImage();
       }
     });
     // set the inpput value to empty
     inputRef.current.value = "";
-    removeImage();
   };
 
   const addImageToPost = (e) => {
