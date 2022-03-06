@@ -4,6 +4,7 @@ import {
   SearchIcon,
   VideoCameraIcon,
 } from "@heroicons/react/solid";
+import Contact from "./Contact";
 
 const contacts = [
   { src: "https://links.papareact.com/f0p", name: "Jeff Bezos" },
@@ -25,6 +26,9 @@ const Widgets = () => {
           <DotsHorizontalIcon className="h-6" />
         </div>
       </div>
+      {contacts.map(({ src, name }) => (
+        <Contact key={src} src={src} name={name} />
+      ))}
     </div>
   );
 };
