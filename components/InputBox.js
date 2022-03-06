@@ -7,9 +7,15 @@ import {
   EmojiHappyIcon,
 } from "@heroicons/react/solid";
 import { useRef } from "react";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
 import { db } from "../firebase";
 import {
+  getDownloadURL,
   getStorage,
   ref,
   uploadBytesResumable,
@@ -34,26 +40,45 @@ const InputBox = () => {
       email: session.user.email,
       image: session.user.image,
       timestamp: serverTimestamp(),
-    })
-      .then((docRef) => {
-        console.log(docRef.id);
-        if (imageToPost) {
-          const storage = getStorage();
-          const imageRef = ref(storage, `posts/${docRef.id}`);
-          const uploadTask = uploadBytesResumable(
-            imageRef,
-            imageToPost,
-            "data_url"
-          );
-          uploadTask.then((snapshot) => {
-            console.log(snapshot);
-          });
-        }
-        inputRef.current.value = "";
-      })
-      .catch((error) => {
-        console.error("Error adding document: ", error);
-      });
+    }).then((docRef) => {
+      console.log(docRef.id);
+      if (imageToPost) {
+        const storage = getStorage();
+        const imageRef = ref(storage, `posts/${docRef.id}`);
+        const metadata = {
+          contentType: "image/jpeg",
+        };
+        const uploadTask = uploadBytesResumable(
+          imageRef,
+          imageToPost,
+          metadata
+        );
+
+        uploadTask.on(
+          "state_changed",
+          null,
+          (error) => console.log(error),
+          () => {
+            console.log("Uploaded!!");
+            // when the upload is complete, set the image url
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              console.log("File available at", downloadURL);
+              setDoc(
+                collection(db, "posts"),
+                docRef.id,
+                {
+                  postImage: downloadURL,
+                },
+                { merge: true }
+              );
+            });
+          }
+        );
+      }
+    });
+    // set the inpput value to empty
+    inputRef.current.value = "";
+    removeImage();
   };
 
   const addImageToPost = (e) => {
