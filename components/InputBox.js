@@ -32,17 +32,17 @@ const InputBox = () => {
           </button>
         </form>
       </div>
-      <div className="flex">
-        <div>
+      <div className="flex justify-evenly">
+        <div className="inputIcon">
           <VideoCameraIcon className="h-7 text-red-500" />
           <p className="text-xs sm:text-sm xl:text-base">Live Video</p>
         </div>
-        <div>
+        <div className="inputIcon">
           <CameraIcon className="h-7 text-green-500" />
           <p className="text-xs sm:text-sm xl:text-base">Photo video</p>
         </div>
 
-        <div>
+        <div className="inputIcon">
           <EmojiHappyIcon className="h-7 text-yellow-500" />
           <p className="text-xs sm:text-sm xl:text-base">Feeling/Activity</p>
         </div>
