@@ -48,6 +48,9 @@ const InputBox = () => {
       setImageToPost(e.target.result);
     };
   };
+  const removeImage = () => {
+    setImageToPost(null);
+  };
   return (
     <div className="mt-6 rounded-2xl bg-white p-2 font-medium text-gray-500 shadow-md focus:outline-none">
       <div className="flex items-center space-x-4 p-4">
@@ -69,6 +72,15 @@ const InputBox = () => {
             Submit
           </button>
         </form>
+        {imageToPost && (
+          <div
+            onClick={removeImage}
+            className="flex cursor-pointer flex-col filter transition duration-150 hover:scale-105 hover:brightness-110"
+          >
+            <img className="object-containj h-10" src={imageToPost} alt="" />
+            <p className="text-center text-xs text-red-500">Remove</p>
+          </div>
+        )}
       </div>
       <div className="flex justify-evenly">
         <div className="inputIcon">
