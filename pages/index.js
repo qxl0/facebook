@@ -5,6 +5,8 @@ import { getSession } from "next-auth/react";
 import Sidebar from "../components/Sidebar";
 import Feed from "../components/Feed";
 import Widgets from "../components/Widgets";
+import { db } from "../firebase";
+import { getDocs, orderBy } from "firebase/firestore";
 
 export default function Home({ session }) {
   if (!session) {
@@ -34,10 +36,19 @@ export default function Home({ session }) {
 export async function getServerSideProps(context) {
   // get user
   const session = await getSession(context);
+  // get posts
+  const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
+  const posts = await getDocs(q);
+  const docs = posts.docs.map((post) => ({
+    id: post.id,
+    ...post.data(),
+    timestamp: null,
+  }));
 
   return {
     props: {
       session,
+      posts: docs,
     },
   };
 }
