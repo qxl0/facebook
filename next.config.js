@@ -5,6 +5,7 @@ const nextConfig = {
       "links.papareact.com",
       "platform-lookaside.fbsbx.com",
       "firebasestorage.googleapis.com",
+      "www.biography.com",
     ],
   },
   reactStrictMode: true,

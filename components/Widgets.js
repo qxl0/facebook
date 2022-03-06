@@ -10,7 +10,10 @@ const contacts = [
   { src: "https://links.papareact.com/f0p", name: "Jeff Bezos" },
   { src: "https://links.papareact.com/kxk", name: "Elon Musk" },
   { src: "https://links.papareact.com/zvy", name: "Bill Gates" },
-  { src: "https://links.papareact.com/5nf", name: "Mark Zuckerberg" },
+  {
+    src: "https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTQyMDA0NDgwMzUzNzcyNjA2/mark-zuckerberg_gettyimages-512304736jpg.jpg",
+    name: "Mark Zuckerberg",
+  },
   { src: "https://links.papareact.com/d0c", name: "Harry Potter" },
   { src: "https://links.papareact.com/6gg", name: "The Queen" },
   { src: "https://links.papareact.com/r57", name: "James Bond" },
