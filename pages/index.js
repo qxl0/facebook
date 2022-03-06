@@ -6,9 +6,9 @@ import Sidebar from "../components/Sidebar";
 import Feed from "../components/Feed";
 import Widgets from "../components/Widgets";
 import { db } from "../firebase";
-import { getDocs, orderBy } from "firebase/firestore";
+import { getDocs, orderBy, query, collection } from "firebase/firestore";
 
-export default function Home({ session }) {
+export default function Home({ session, posts }) {
   if (!session) {
     return <Login />;
   }
@@ -25,7 +25,7 @@ export default function Home({ session }) {
         {/* sidebar */}
         <Sidebar />
         {/* feed */}
-        <Feed />
+        <Feed posts={posts} />
         {/* widgets */}
         <Widgets />
       </main>

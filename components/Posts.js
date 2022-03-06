@@ -4,25 +4,38 @@ import { collection } from "firebase/firestore";
 import { db } from "../firebase";
 import Post from "./Post";
 
-const Posts = () => {
+const Posts = ({ posts }) => {
   const [realtimePosts, loading, error] = useCollection(
     query(collection(db, "posts"), orderBy("timestamp", "desc"))
   );
 
   return (
     <div>
-      {realtimePosts?.docs.map((post) => (
-        // console.log("postImage: ", post.data().postImage),
-        <Post
-          key={post.id}
-          name={post.data().name}
-          message={post.data().message}
-          email={post.data().email}
-          timestamp={post.data().timestamp}
-          image={post.data().image}
-          postImage={post.data().postImage}
-        />
-      ))}
+      {realtimePosts
+        ? realtimePosts?.docs.map((post) => (
+            // console.log("postImage: ", post.data().postImage),
+            <Post
+              key={post.id}
+              name={post.data().name}
+              message={post.data().message}
+              email={post.data().email}
+              timestamp={post.data().timestamp}
+              image={post.data().image}
+              postImage={post.data().postImage}
+            />
+          ))
+        : posts.map((post) => (
+            // console.log("postImage: ", post.data().postImage),
+            <Post
+              key={post.id}
+              name={post.data().name}
+              message={post.data().message}
+              email={post.data().email}
+              timestamp={post.data().timestamp}
+              image={post.data().image}
+              postImage={post.data().postImage}
+            />
+          ))}
     </div>
   );
 };

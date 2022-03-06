@@ -3,7 +3,7 @@ import InputBox from "./InputBox";
 import Posts from "./Posts";
 import Stories from "./Stories";
 
-const Feed = () => {
+const Feed = ({ posts }) => {
   return (
     <div
       className="mr-4 h-screen flex-grow 
@@ -16,7 +16,7 @@ const Feed = () => {
         {/* Inputbox */}
         <InputBox />
         {/* Posts */}
-        <Posts />
+        <Posts posts={posts} />
       </div>
     </div>
   );
