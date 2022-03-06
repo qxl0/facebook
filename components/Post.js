@@ -31,15 +31,15 @@ const Post = ({ id, name, message, email, timestamp, image, postImage }) => {
 
       {/* footer */}
       <div className="flex items-center justify-between rounded-b-2xl border-t bg-white text-gray-400 shadow-md">
-        <div className="inputIcon">
+        <div className="inputIcon rounded-none rounded-bl-2xl">
           <ThumbUpIcon className="h-4" />
           <p className="text-xs sm:text-base">Like</p>
         </div>
-        <div className="inputIcon">
+        <div className="inputIcon rounded-none">
           <ChatAltIcon className="h-4" />
           <p className="text-xs sm:text-base">Comment</p>
         </div>
-        <div className="inputIcon">
+        <div className="inputIcon rounded-none rounded-br-2xl">
           <ShareIcon className="h-4" />
           <p className="text-xs sm:text-base">Share</p>
         </div>
