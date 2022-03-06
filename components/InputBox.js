@@ -6,10 +6,36 @@ import {
   CameraIcon,
   EmojiHappyIcon,
 } from "@heroicons/react/solid";
+import { useRef } from "react";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase";
+
 const InputBox = () => {
   const { data: session } = useSession();
+  const inputRef = useRef(null);
+
   const sendPost = (e) => {
-    e.peventDefault();
+    e.preventDefault();
+
+    if (!inputRef.current.value) {
+      return;
+    }
+
+    debugger;
+    addDoc(collection(db, "posts"), {
+      message: inputRef.current.value,
+      name: session.user.name,
+      email: session.user.email,
+      image: session.user.image,
+      timestamp: serverTimestamp(),
+    })
+      .then((docRef) => {
+        console.log(docRef.id);
+        inputRef.current.value = "";
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
   };
   return (
     <div className="mt-6 rounded-2xl bg-white p-2 font-medium text-gray-500 shadow-md focus:outline-none">
@@ -23,6 +49,7 @@ const InputBox = () => {
         />
         <form className="flex flex-1">
           <input
+            ref={inputRef}
             className="h-12 flex-grow rounded-full bg-gray-100 px-5 focus:outline-none"
             type="text"
             placeholder={`What's on your mind, ${session.user.name}`}
