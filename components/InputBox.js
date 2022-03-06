@@ -18,8 +18,8 @@ import {
   getDownloadURL,
   getStorage,
   ref,
-  uploadBytesResumable,
   uploadString,
+  uploadBytesResumable,
 } from "firebase/storage";
 
 const InputBox = () => {
@@ -45,13 +45,10 @@ const InputBox = () => {
       if (imageToPost) {
         const storage = getStorage();
         const imageRef = ref(storage, `posts/${docRef.id}`);
-        const metadata = {
-          contentType: "image/jpeg",
-        };
         const uploadTask = uploadBytesResumable(
           imageRef,
           imageToPost,
-          metadata
+          "data_url"
         );
 
         uploadTask.on(
@@ -62,10 +59,9 @@ const InputBox = () => {
             console.log("Uploaded!!");
             // when the upload is complete, set the image url
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              console.log("File available at", downloadURL);
+              console.log(`Posts ${docRef.id} , url at ${downloadURL}`);
               setDoc(
-                collection(db, "posts"),
-                docRef.id,
+                docRef,
                 {
                   postImage: downloadURL,
                 },
