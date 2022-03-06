@@ -4,8 +4,11 @@ import React from "react";
 
 const InputBox = () => {
   const { data: session } = useSession();
+  const sendPost = (e) => {
+    e.peventDefault();
+  };
   return (
-    <div>
+    <div className="mt-6 rounded-2xl bg-white p-2 font-medium text-gray-500 shadow-md focus:outline-none">
       <div className="flex items-center space-x-4 p-4">
         <Image
           className="rounded-full"
@@ -20,6 +23,9 @@ const InputBox = () => {
             type="text"
             placeholder={`What's on your mind, ${session.user.name}`}
           />
+          <button hidden onClick={sendPost} type="submit">
+            Submit
+          </button>
         </form>
       </div>
     </div>
